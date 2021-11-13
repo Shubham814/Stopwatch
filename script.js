@@ -1,25 +1,37 @@
+let ms = 0;
 let seconds = 0;
 let min = 0;
 let hour = 0;
 
-let displaySeconds = 00;
-let displayMin = 00;
-let displayHour = 00;
+let displayMs = 0;
+let displaySeconds = 0;
+let displayMin = 0;
+let displayHour = 0;
 
 let interval = null;
 let state = "stopped";
 
 function stopwatch(){
-    seconds++;
+    ms++;
 
-    if(seconds / 60 === 1){
-        seconds = 0;
-        min++;
+    if(ms / 100 === 1){
+        ms = 0;
+        seconds++;
 
-        if(min / 60 === 1){
-            min = 0;
-            hour++;
+        if(seconds / 60 === 1){
+            seconds = 0;
+            min++;
+
+            if(min / 60 === 1){
+                min = 0;
+                hour++;
+            }
         }
+    }
+    if(ms < 10){
+        displayMs = "0"  + ms.toString();
+    } else {
+        displayMs = ms;
     }
 
     if(seconds < 10){
@@ -41,12 +53,13 @@ function stopwatch(){
     }
 
     document.getElementById("display").innerHTML = displayHour + ":" + displayMin + ":" + displaySeconds;
+    document.getElementById("ms").innerHTML = displayMs;
 }
 
 
 function startStop(){
     if(state === "stopped"){
-        interval = window.setInterval(stopwatch, 1000);
+        interval = window.setInterval(stopwatch, 10);
         document.getElementById("startStop").innerHTML   = "Stop";
         state = "started";
     } else {
@@ -58,8 +71,15 @@ function startStop(){
 
 function reset(){
     window.clearInterval(interval);
+    ms = 0;
     seconds = 0;
     min = 0;
     hour = 0;
     document.getElementById("display").innerHTML = "00:00:00";
+    document.getElementById("ms").innerHTML = "00";
+
+    if(state === "started"){
+        document.getElementById("startStop").innerHTML   = "Start";
+        state = "stopped";
+    }
 }
