@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@300&display=swap');
 * {
     font-family: 'Roboto Mono', monospace;
+    color: white;
 }
 body {
     margin: 0;
     padding:0;
 }
 .container {
-    height: 300px;
+    height: 100vh;
     width: 100%;
+    background-image: linear-gradient(to left top, blue, violet, red, orange);
 }
 
 #display {
@@ -28,4 +30,8 @@ body {
     font-size: 15px;
     width: 100px;
     height: 50px;
+    border-width: 1;
+    border-radius: 10px;
+    border-color: black;
+    background-color: transparent;
 }
